@@ -9,67 +9,67 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
         return $data;
     }
 
-    $trackDriveData = [
-        'lead_token' => $_POST['lead_token'],
-        'traffic_source_id' => $_POST['traffic_source_id'],
-        'caller_id' => $_POST['caller_id'],
-        'first_name' => $_POST['first_name'],
-        'last_name' => $_POST['last_name'],
-        'email' => $_POST['email'],
-        'dob' => $_POST['dob'],
-        'state' => $_POST['state'],
-        'city' => $_POST['city'],
-        'zip' => $_POST['zip'],
-        'source_url' => $_POST['source_url'],
-        'ip_address' => $_POST['ip_address'],
-        'original_lead_submit_date' => $_POST['original_lead_submit_date'],
-        'trusted_form_cert_url' => $_POST['trusted_form_cert_url'],
-        'jornaya_leadid' => $_POST['jornaya_leadid'],
-    ];
+    // $trackDriveData = [
+    //     'lead_token' => $_POST['lead_token'],
+    //     'traffic_source_id' => $_POST['traffic_source_id'],
+    //     'caller_id' => $_POST['caller_id'],
+    //     'first_name' => $_POST['first_name'],
+    //     'last_name' => $_POST['last_name'],
+    //     'email' => $_POST['email'],
+    //     'dob' => $_POST['dob'],
+    //     'state' => $_POST['state'],
+    //     'city' => $_POST['city'],
+    //     'zip' => $_POST['zip'],
+    //     'source_url' => $_POST['source_url'],
+    //     'ip_address' => $_POST['ip_address'],
+    //     'original_lead_submit_date' => $_POST['original_lead_submit_date'],
+    //     'trusted_form_cert_url' => $_POST['trusted_form_cert_url'],
+    //     'jornaya_leadid' => $_POST['jornaya_leadid'],
+    // ];
 
-    $trackDriveUrl = "https://evolvetech-innovations.trackdrive.com/api/v1/leads";
-    $ch = curl_init($trackDriveUrl);
-    curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-    curl_setopt($ch, CURLOPT_POST, true);
-    curl_setopt($ch, CURLOPT_POSTFIELDS, http_build_query($trackDriveData));
-    curl_setopt($ch, CURLOPT_HTTPHEADER, [
-        'Content-Type: application/x-www-form-urlencoded',
-    ]);
+    // $trackDriveUrl = "https://evolvetech-innovations.trackdrive.com/api/v1/leads";
+    // $ch = curl_init($trackDriveUrl);
+    // curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+    // curl_setopt($ch, CURLOPT_POST, true);
+    // curl_setopt($ch, CURLOPT_POSTFIELDS, http_build_query($trackDriveData));
+    // curl_setopt($ch, CURLOPT_HTTPHEADER, [
+    //     'Content-Type: application/x-www-form-urlencoded',
+    // ]);
 
-    $trackDriveResponse = curl_exec($ch);
-    $trackDriveHttpCode = curl_getinfo($ch, CURLINFO_HTTP_CODE);
-    $curlError = curl_error($ch);
-    curl_close($ch);
+    // $trackDriveResponse = curl_exec($ch);
+    // $trackDriveHttpCode = curl_getinfo($ch, CURLINFO_HTTP_CODE);
+    // $curlError = curl_error($ch);
+    // curl_close($ch);
 
-    if ($curlError) {
-        error_log("TrackDrive cURL Error: $curlError");
-        echo json_encode(['status' => 'error', 'message' => "TrackDrive cURL Error: $curlError"]);
-        exit;
-    }
+    // if ($curlError) {
+    //     error_log("TrackDrive cURL Error: $curlError");
+    //     echo json_encode(['status' => 'error', 'message' => "TrackDrive cURL Error: $curlError"]);
+    //     exit;
+    // }
 
-    if ($trackDriveHttpCode === 200) {
-        $responseMessage = 'Existing Lead Modified';
-        echo json_encode(['status' => 'success', 'message' => $responseMessage]);
-    } elseif ($trackDriveHttpCode === 201) {
-        $responseMessage = 'New Lead Submitted';
-        echo json_encode(['status' => 'success', 'message' => $responseMessage]);
-    } elseif ($trackDriveHttpCode === 422) {
-        $responseMessage = 'DNC Lead';
-        echo json_encode(['status' => 'error', 'message' => "$responseMessage $trackDriveResponse"]);
-    } else {
-        $responseMessage = "TrackDrive API Error: $trackDriveResponse";
-        echo json_encode(['status' => 'error', 'message' => $responseMessage]);
-    }
+    // if ($trackDriveHttpCode === 200) {
+    //     $responseMessage = 'Existing Lead Modified';
+    //     echo json_encode(['status' => 'success', 'message' => $responseMessage]);
+    // } elseif ($trackDriveHttpCode === 201) {
+    //     $responseMessage = 'New Lead Submitted';
+    //     echo json_encode(['status' => 'success', 'message' => $responseMessage]);
+    // } elseif ($trackDriveHttpCode === 422) {
+    //     $responseMessage = 'DNC Lead';
+    //     echo json_encode(['status' => 'error', 'message' => "$responseMessage $trackDriveResponse"]);
+    // } else {
+    //     $responseMessage = "TrackDrive API Error: $trackDriveResponse";
+    //     echo json_encode(['status' => 'error', 'message' => $responseMessage]);
+    // }
 
-    $responseDecoded = json_decode($trackDriveResponse, true);
-    $status = $responseDecoded['status'] ?? $responseMessage;
-    $success = $responseDecoded['success'] ?? ($trackDriveHttpCode === 200 || $trackDriveHttpCode === 201 || $trackDriveHttpCode === 422);
+    // $responseDecoded = json_decode($trackDriveResponse, true);
+    // $status = $responseDecoded['status'] ?? $responseMessage;
+    // $success = $responseDecoded['success'] ?? ($trackDriveHttpCode === 200 || $trackDriveHttpCode === 201 || $trackDriveHttpCode === 422);
 
-    $minimalResponse = ['status' => $status, 'success' => $success];
+    // $minimalResponse = ['status' => $status, 'success' => $success];
 
-    $googleSheetKeys = ['first_name', 'last_name', 'caller_id', 'email', 'dob', 'state', 'city', 'zip', 'xxTrustedFormToken', 'TrustedFormPingUrl', 'jornaya_leadid', 'ip_address', 'traffic_source_id', 'ip_region', 'ip_city', 'ip_country', 'api_response'];
+    $googleSheetKeys = ['first_name', 'last_name', 'caller_id', 'email', 'dob', 'state', 'city', 'zip', 'xxTrustedFormToken', 'TrustedFormPingUrl', 'jornaya_leadid', 'ip_address', 'traffic_source_id', 'ip_region', 'ip_city', 'ip_country'];
     $googleSheetData = prepareFormData($_POST, $googleSheetKeys);
-    $googleSheetData['api_response'] = json_encode(['status' => $status, 'message' => $responseMessage]);
+    // $googleSheetData['api_response'] = json_encode(['status' => $status, 'message' => $responseMessage]);
 
     $googleSheetUrl = 'https://script.google.com/macros/s/AKfycbxF-qYrIAEFGIPfoCfLPYU9p8_9-5CPlarkTogsd3JeWbdpdqKHsuEQYy8Y8oQkyMMD/exec';
     $postData = http_build_query($googleSheetData);
