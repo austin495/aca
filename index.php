@@ -85,12 +85,12 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
 
     if ($googleResult === FALSE) {
         error_log('Failed to submit data to Google Sheets');
-        echo json_encode('Failed to submit data');
+        echo json_encode(['status' => 'error', 'message' => 'Failed to submit data']);
         exit;
     } else {
-        echo json_encode('Data successfully submitted');
+        echo json_encode(['status' => 'success', 'message' => 'Data successfully submitted']);
+        exit;
     }
-    exit;
 }
 ?>
 <!DOCTYPE html>
