@@ -170,7 +170,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
         }
 
         .GENDER, .HOUSEHOLDSIZE {
-            width: 50%;
+            width: 48%;
         }
 
         .HOUSEHOLDINCOME {
