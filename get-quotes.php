@@ -171,10 +171,16 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
 
         .GENDER, .HOUSEHOLDSIZE {
             width: 48%;
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
         }
 
         .HOUSEHOLDINCOME {
             width: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
         }
 
         .GENDER label {
