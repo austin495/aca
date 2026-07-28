@@ -441,14 +441,11 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
                         <div class="GENDER">
                             <fieldset>
                                 <legend>Gender: <span style="color: red;">*</span></legend>
-                                <div>
-                                    <label for="GENDERMALE">Male</label>
-                                    <input type="radio" id="GENDERMALE" value="Male" name="gender" required="">
-                                </div>
-                                <div>
-                                    <label for="GENDERFEMALE">Female</label>
-                                    <input type="radio" id="GENDERFEMALE" value="Female" name="gender" required="">
-                                </div>
+                                <select name="gender" id="gender" required style="display: none;">
+                                    <option value="">Select Gender</option>
+                                    <option value="Male">Male</option>
+                                    <option value="Female">Female</option>
+                                </select>
                             </fieldset>
                         </div>
 
