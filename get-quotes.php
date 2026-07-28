@@ -169,6 +169,14 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
             z-index: 1;
         }
 
+        .GENDER, .HOUSEHOLDSIZE {
+            width: 50%;
+        }
+
+        .HOUSEHOLDINCOME {
+            width: 100%;
+        }
+
         .GENDER label {
             display: block;
             color: #fff;
