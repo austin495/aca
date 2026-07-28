@@ -129,7 +129,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
             flex-direction: row;
             align-items: center;
             justify-content: center;
-            height: 100vh;
+            height: auto;
         }
 
         .inner-wraper .inner-2 {
