@@ -67,7 +67,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
 
     // $minimalResponse = ['status' => $status, 'success' => $success];
 
-    $googleSheetKeys = ['first_name', 'last_name', 'caller_id', 'email', 'dob', 'state', 'city', 'zip', 'gender','house_hold_size','house_hold_income', 'xxTrustedFormToken', 'TrustedFormPingUrl', 'jornaya_leadid', 'ip_address', 'traffic_source_id', 'ip_region', 'ip_city', 'ip_country'];
+    $googleSheetKeys = ['first_name', 'last_name', 'caller_id', 'email', 'dob', 'state', 'city', 'zip', 'gender', 'house_hold_size', 'house_hold_income', 'address', 'xxTrustedFormToken', 'TrustedFormPingUrl', 'jornaya_leadid', 'ip_address', 'traffic_source_id', 'ip_region', 'ip_city', 'ip_country'];
     $googleSheetData = prepareFormData($_POST, $googleSheetKeys);
     // $googleSheetData['api_response'] = json_encode(['status' => $status, 'message' => $responseMessage]);
 
