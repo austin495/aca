@@ -196,7 +196,8 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
             z-index: 1;
         }
 
-        input {
+        input, select {
+            display: block;
             width: 100%;
             padding: 18px 12px 12px 12px;
             margin-bottom: 20px;
