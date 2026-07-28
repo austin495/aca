@@ -170,15 +170,8 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
             z-index: 1;
         }
 
-        .GENDER, .HOUSEHOLDSIZE {
+        .GENDER, .HOUSEHOLDSIZE, .ADDRESS, .HOUSEHOLDINCOME {
             width: 48%;
-            display: flex;
-            flex-direction: column;
-            align-items: flex-start;
-        }
-
-        .HOUSEHOLDINCOME {
-            width: 100%;
             display: flex;
             flex-direction: column;
             align-items: flex-start;
@@ -446,6 +439,11 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
                         <div class="HOUSEHOLDINCOME">
                             <label for="house_hold_income">Household Income: <span style="color: red;">*</span></label>
                             <input type="text" id="house_hold_income" name="house_hold_income" required>
+                        </div>
+
+                        <div class="ADDRESS">
+                            <label for="address">Address: <span style="color: red;">*</span></label>
+                            <input type="text" id="address" name="address" required>
                         </div>
 
                         <div class="STATE">
