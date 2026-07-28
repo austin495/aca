@@ -183,19 +183,6 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
             align-items: flex-start;
         }
 
-        .GENDER label {
-            display: block;
-            color: #fff;
-			font-family: 'Montserrat';
-			font-size: 16px;
-			font-weight: 500;
-            background: none;
-            margin-left: 0px;
-            margin-bottom: 0px;
-            border-radius: 0px;
-            z-index: 1;
-        }
-
         input, select {
             display: block;
             width: 100%;
@@ -210,7 +197,9 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
 			font-size: 14px;
         }
 		
-
+        select option {
+            color: #000;
+        }
 
         button {
             background-color: #7ED218;
@@ -440,14 +429,12 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
                         </div>
 
                         <div class="GENDER">
-                            <fieldset>
-                                <legend>Gender: <span style="color: red;">*</span></legend>
-                                <select name="gender" id="gender" required>
-                                    <option value="">Select Gender</option>
-                                    <option value="Male">Male</option>
-                                    <option value="Female">Female</option>
-                                </select>
-                            </fieldset>
+                            <label>Gender: <span style="color: red;">*</span></label>
+                            <select name="gender" id="gender" required>
+                                <option value="">Select Gender</option>
+                                <option value="Male">Male</option>
+                                <option value="Female">Female</option>
+                            </select>
                         </div>
 
                         <div class="HOUSEHOLDSIZE">
