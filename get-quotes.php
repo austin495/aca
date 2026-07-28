@@ -442,7 +442,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
                         <div class="GENDER">
                             <fieldset>
                                 <legend>Gender: <span style="color: red;">*</span></legend>
-                                <select name="gender" id="gender" required style="display: none;">
+                                <select name="gender" id="gender" required>
                                     <option value="">Select Gender</option>
                                     <option value="Male">Male</option>
                                     <option value="Female">Female</option>
