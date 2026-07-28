@@ -175,6 +175,10 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
 			font-family: 'Montserrat';
 			font-size: 16px;
 			font-weight: 500;
+            background: none;
+            margin-left: 0px;
+            margin-bottom: 0px;
+            border-radius: 0px;
             z-index: 1;
         }
 
