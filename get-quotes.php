@@ -129,6 +129,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
             flex-direction: row;
             align-items: center;
             justify-content: center;
+            padding: 100px 0;
             height: auto;
         }
 
