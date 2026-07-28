@@ -154,7 +154,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
             align-items: center;
         }
 
-        label {
+        label, legend {
             display: block;
             padding: 2px 8px;
             margin-bottom: 8px;
@@ -166,6 +166,15 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
             margin-bottom: -10px;
             background: rgb(255, 255, 255);
             border-radius: 5px;
+            z-index: 1;
+        }
+
+        .GENDER label {
+            display: block;
+            color: #fff;
+			font-family: 'Montserrat';
+			font-size: 16px;
+			font-weight: 500;
             z-index: 1;
         }
 
@@ -409,11 +418,6 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
                         <div class="DOB">
                             <label for="dob">Date of Birth (MM-DD-YYYY): <span style="color: red;">*</span></label>
                             <input type="text" id="dob" name="dob" required>
-                        </div>
-
-                        <div class="GENDER">
-                            <label for="gender">Gender: <span style="color: red;">*</span></label>
-                            <input type="text" id="gender" name="gender" required>
                         </div>
 
                         <div class="GENDER">
