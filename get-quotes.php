@@ -1,5 +1,6 @@
 <?php
 if ($_SERVER["REQUEST_METHOD"] === "POST") {
+    header('Content-Type: application/json');
 
     function prepareFormData($postData, $keys) {
         $data = [];
@@ -8,6 +9,8 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
         }
         return $data;
     }
+
+    $response = ['status' => 'error', 'message' => 'Unable to process request.'];
 
     $trackDriveData = [
         'lead_token' => $_POST['lead_token'],
@@ -43,26 +46,27 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
 
     if ($curlError) {
         error_log("TrackDrive cURL Error: $curlError");
-        echo json_encode(['status' => 'error', 'message' => "TrackDrive cURL Error: $curlError"]);
+        $response = ['status' => 'error', 'message' => "TrackDrive cURL Error: $curlError"];
+        echo json_encode($response);
         exit;
     }
 
     if ($trackDriveHttpCode === 200) {
         $responseMessage = 'Existing Lead Modified';
-        echo json_encode(['status' => 'success', 'message' => $responseMessage]);
+        $response = ['status' => 'success', 'message' => $responseMessage];
     } elseif ($trackDriveHttpCode === 201) {
         $responseMessage = 'New Lead Submitted';
-        echo json_encode(['status' => 'success', 'message' => $responseMessage]);
+        $response = ['status' => 'success', 'message' => $responseMessage];
     } elseif ($trackDriveHttpCode === 422) {
         $responseMessage = 'DNC Lead';
-        echo json_encode(['status' => 'error', 'message' => "$responseMessage $trackDriveResponse"]);
+        $response = ['status' => 'error', 'message' => "$responseMessage $trackDriveResponse"];
     } else {
         $responseMessage = "TrackDrive API Error: $trackDriveResponse";
-        echo json_encode(['status' => 'error', 'message' => $responseMessage]);
+        $response = ['status' => 'error', 'message' => $responseMessage];
     }
 
     $responseDecoded = json_decode($trackDriveResponse, true);
-    $status = $responseDecoded['status'] ?? $responseMessage;
+    $status = $responseDecoded['status'] ?? $response['status'] ?? 'error';
     $success = $responseDecoded['success'] ?? ($trackDriveHttpCode === 200 || $trackDriveHttpCode === 201 || $trackDriveHttpCode === 422);
 
     $minimalResponse = ['status' => $status, 'success' => $success];
@@ -85,12 +89,13 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
 
     if ($googleResult === FALSE) {
         error_log('Failed to submit data to Google Sheets');
-        echo json_encode(['status' => 'error', 'message' => 'Failed to submit data']);
-        exit;
-    } else {
-        echo json_encode(['status' => 'success', 'message' => 'Data successfully submitted']);
-        exit;
+        $response = ['status' => 'error', 'message' => 'Failed to submit data'];
+    } elseif ($response['status'] === 'success') {
+        $response = ['status' => 'success', 'message' => 'Data successfully submitted'];
     }
+
+    echo json_encode($response);
+    exit;
 }
 ?>
 <!DOCTYPE html>
